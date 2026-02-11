@@ -1,0 +1,44 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+.editor-container {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  overflow: hidden;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #e0e0e0;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  min-width: 120px;
+}
+
+.format-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.format-button:hover {
+  background-color: #0056b3;
+}
+
+.format-button:active {
+  transform: scale(0.98);
+}

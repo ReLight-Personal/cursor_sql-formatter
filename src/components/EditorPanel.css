@@ -1,0 +1,49 @@
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  overflow: hidden;
+}
+
+.editor-header {
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.editor-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.editor-textarea {
+  flex: 1;
+  padding: 1.5rem;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.editor-textarea:focus {
+  background-color: #fafafa;
+}
+
+.editor-textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.editor-textarea[readonly] {
+  background-color: #f8f9fa;
+  cursor: default;
+}

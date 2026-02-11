@@ -1,0 +1,35 @@
+import './EditorPanel.css'
+
+interface EditorPanelProps {
+  title: string
+  value: string
+  onChange: (value: string) => void
+  placeholder?: string
+  readOnly?: boolean
+}
+
+const EditorPanel = ({
+  title,
+  value,
+  onChange,
+  placeholder,
+  readOnly = false,
+}: EditorPanelProps) => {
+  return (
+    <div className="editor-panel">
+      <div className="editor-header">
+        <h2 className="editor-title">{title}</h2>
+      </div>
+      <textarea
+        className="editor-textarea"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        readOnly={readOnly}
+        spellCheck={false}
+      />
+    </div>
+  )
+}
+
+export default EditorPanel

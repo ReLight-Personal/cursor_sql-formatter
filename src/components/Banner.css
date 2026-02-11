@@ -1,0 +1,33 @@
+.banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.banner-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.banner-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.banner-placeholder {
+  min-width: 200px;
+  height: 100%;
+  /* 추후 광고나 공지사항 영역 */
+}
