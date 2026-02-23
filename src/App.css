@@ -5,11 +5,18 @@
   width: 100%;
 }
 
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
 .editor-container {
   display: flex;
   flex: 1;
   gap: 0;
   overflow: hidden;
+  min-width: 0;
 }
 
 .divider {
