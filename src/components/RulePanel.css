@@ -1,22 +1,23 @@
 .rule-panel {
   width: 100%;
   min-width: 260px;
-  background: #f8f9fa;
-  border-right: 1px solid #e0e0e0;
-  padding: 1rem 1.25rem;
+  background: hsl(var(--card));
+  border-radius: var(--radius-lg);
+  border: 1px solid hsl(var(--border));
+  padding: 0.9rem 1rem 1rem;
 }
 
 .rule-panel-title {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #333;
+  color: hsl(var(--foreground));
   margin: 0 0 1rem 0;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .rule-section {
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .rule-row {
@@ -28,14 +29,14 @@
 .rule-toggle input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  accent-color: #667eea;
+  accent-color: hsl(var(--primary));
   cursor: pointer;
 }
 
 .rule-toggle label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #495057;
+  color: hsl(var(--foreground));
   cursor: pointer;
 }
 
@@ -52,12 +53,12 @@
   align-items: center;
   gap: 0.35rem;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: hsl(var(--muted-foreground));
   cursor: pointer;
 }
 
 .radio-label input[type="radio"] {
-  accent-color: #667eea;
+  accent-color: hsl(var(--primary));
   cursor: pointer;
 }
 
@@ -66,14 +67,14 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.85rem;
-  color: #6c757d;
+  color: hsl(var(--muted-foreground));
 }
 
 .rule-inline select {
   padding: 0.25rem 0.5rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  border: 1px solid hsl(var(--input));
+  border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  background: #fff;
+  background: hsl(var(--card));
   cursor: pointer;
 }

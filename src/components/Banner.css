@@ -1,11 +1,25 @@
 .banner {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 1.5rem 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border-radius: var(--radius-lg);
+  border: 1px solid hsl(var(--border));
+  padding: 1.1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+  }
 }
 
 .banner-content {
@@ -15,19 +29,24 @@
 }
 
 .banner-title {
-  font-size: 1.75rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin: 0;
+  letter-spacing: -0.03em;
 }
 
 .banner-subtitle {
   font-size: 0.9rem;
-  opacity: 0.9;
+  color: hsl(var(--muted-foreground));
   margin: 0;
 }
 
 .banner-placeholder {
-  min-width: 200px;
+  min-width: 180px;
   height: 100%;
-  /* 추후 광고나 공지사항 영역 */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8rem;
 }

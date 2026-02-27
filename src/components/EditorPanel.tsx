@@ -1,4 +1,5 @@
 import './EditorPanel.css'
+import { Textarea } from './ui/textarea'
 
 interface EditorPanelProps {
   title: string
@@ -20,7 +21,7 @@ const EditorPanel = ({
       <div className="editor-header">
         <h2 className="editor-title">{title}</h2>
       </div>
-      <textarea
+      <Textarea
         className="editor-textarea"
         value={value}
         onChange={(e) => onChange(e.target.value)}

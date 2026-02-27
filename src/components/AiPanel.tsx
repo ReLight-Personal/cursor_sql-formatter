@@ -1,5 +1,6 @@
 import type { AiProvider } from '../types/ai'
 import './AiPanel.css'
+import { Button } from './ui/button'
 
 interface AiPanelProps {
   provider: AiProvider
@@ -47,9 +48,15 @@ export default function AiPanel({
           {keySaved && apiKey ? (
             <div className="ai-key-saved">
               <span className="ai-key-masked">{displayKey}</span>
-              <button type="button" className="ai-key-reset" onClick={onClearKey}>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="ai-key-reset"
+                onClick={onClearKey}
+              >
                 다시 입력
-              </button>
+              </Button>
             </div>
           ) : (
             <>
@@ -61,28 +68,28 @@ export default function AiPanel({
                 autoComplete="off"
                 className="ai-key-input"
               />
-              <button
+              <Button
                 type="button"
                 className="ai-save-key-btn"
                 onClick={onSaveKey}
                 disabled={!apiKey.trim()}
               >
                 저장
-              </button>
+              </Button>
             </>
           )}
         </div>
         <p className="ai-key-hint">키는 브라우저에만 저장됩니다. 외부로 전송되지 않습니다.</p>
       </section>
 
-      <button
+      <Button
         type="button"
         className="ai-request-btn"
         onClick={onRequestAi}
         disabled={!keySaved || isLoading}
       >
         {isLoading ? '처리 중...' : 'AI 도움받기'}
-      </button>
+      </Button>
     </aside>
   )
 }

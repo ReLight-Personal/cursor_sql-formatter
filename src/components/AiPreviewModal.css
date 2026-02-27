@@ -1,7 +1,7 @@
 .ai-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,28 +10,29 @@
 }
 
 .ai-modal {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  background: hsl(var(--card));
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
   max-width: 900px;
   width: 100%;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border: 1px solid hsl(var(--border));
 }
 
 .ai-modal-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #333;
+  color: hsl(var(--foreground));
   margin: 0;
   padding: 1.25rem 1.5rem 0.25rem;
 }
 
 .ai-modal-desc {
   font-size: 0.9rem;
-  color: #6c757d;
+  color: hsl(var(--muted-foreground));
   margin: 0 0 1rem 0;
   padding: 0 1.5rem;
 }
@@ -56,19 +57,19 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
 .ai-modal-label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #495057;
+  color: hsl(var(--muted-foreground));
   margin: 0;
   padding: 0.5rem 0.75rem;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+  background: hsl(var(--muted));
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .ai-modal-code {
@@ -79,7 +80,7 @@
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   line-height: 1.5;
   overflow: auto;
-  background: #fafafa;
+  background: hsl(var(--card));
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -89,35 +90,35 @@
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #e9ecef;
-  background: #f8f9fa;
+  border-top: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
 }
 
 .ai-modal-btn {
   padding: 0.5rem 1.25rem;
   font-size: 0.95rem;
   font-weight: 500;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .ai-modal-cancel {
-  background: #fff;
-  border: 1px solid #ced4da;
-  color: #495057;
+  background: transparent;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
 }
 
 .ai-modal-cancel:hover {
-  background: #e9ecef;
+  background: hsl(var(--card));
 }
 
 .ai-modal-apply {
-  background: #667eea;
+  background: hsl(var(--primary));
   border: none;
-  color: white;
+  color: hsl(var(--primary-foreground));
 }
 
 .ai-modal-apply:hover {
-  background: #5a6fd6;
+  opacity: 0.96;
 }

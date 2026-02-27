@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { ReplaceRuleItem, ReplaceRuleType } from '../types/customRules'
 import { createReplaceRule } from '../types/customRules'
 import './TemplatePanel.css'
+import { Button } from './ui/button'
 
 interface TemplatePanelProps {
   rules: ReplaceRuleItem[]
@@ -63,9 +64,14 @@ export default function TemplatePanel({ rules, onChange }: TemplatePanelProps) {
             spellCheck={false}
           />
         </div>
-        <button type="button" className="template-add-btn" onClick={addRule} disabled={!find.trim()}>
+        <Button
+          type="button"
+          className="template-add-btn"
+          onClick={addRule}
+          disabled={!find.trim()}
+        >
           규칙 추가
-        </button>
+        </Button>
       </section>
 
       <section className="template-list">

@@ -1,0 +1,80 @@
+## shadcn/ui 스타일 적용 정리
+
+### 1. 의존성
+
+- **런타임**
+  - `lucide-react`
+  - `@radix-ui/react-dialog`
+  - `@radix-ui/react-scroll-area`
+- **개발 의존성**
+  - `tailwindcss`
+  - `postcss`
+  - `autoprefixer`
+  - `class-variance-authority`
+  - `tailwind-merge`
+  - `@types/node`
+
+### 2. Tailwind & 테마 설정
+
+- **`postcss.config.mjs`**
+  - `tailwindcss`, `autoprefixer` 플러그인 등록.
+- **`tailwind.config.js`**
+  - `content`: `./index.html`, `./src/**/*.{ts,tsx,js,jsx}` 스캔.
+  - `theme.extend.colors`
+    - `background`, `foreground`, `card`, `muted`, `border`, `input`, `primary`, `ring`를 CSS 변수 기반 `hsl(var(--...))` 로 매핑.
+  - `theme.extend.borderRadius`
+    - `lg`, `md`, `sm`를 `--radius-*` CSS 변수에 매핑.
+- **`src/index.css`**
+  - `@tailwind base/components/utilities` 추가.
+  - `@layer base` 내부에서 전역 CSS 변수 정의:
+    - `--background`, `--foreground`, `--card`, `--muted`, `--border`, `--input`, `--primary`, `--primary-foreground`, `--ring`, `--radius-*`.
+  - `body`에 `bg-background`, `text-foreground` 적용.
+
+### 3. 공용 UI 유틸 & 컴포넌트
+
+- **`src/lib/utils.ts`**
+  - `cn(...inputs)` : `clsx` + `tailwind-merge` 로 클래스 머지 유틸.
+- **`src/components/ui/button.tsx`**
+  - shadcn 스타일의 `Button` 컴포넌트.
+  - `variant`: `default`(primary), `outline`, `ghost`.
+  - `size`: `default`, `sm`, `lg`.
+  - 공통 포커스 링(`focus-visible:ring-2`), disabled 상태 등 포함.
+- **`src/components/ui/textarea.tsx`**
+  - Tailwind 기반 `Textarea` 컴포넌트.
+  - 모노스페이스 폰트, `border-input`, `bg-background`, placeholder 색, 포커스 링(`ring-primary`) 적용.
+
+### 4. 기존 컴포넌트 교체 내역
+
+- **`App.tsx`**
+  - 가운데 `정렬하기 →` 버튼을 기존 CSS 버튼에서 `Button` 컴포넌트로 교체.
+- **`EditorPanel.tsx`**
+  - `<textarea>` → `Textarea` 로 교체.
+  - 에디터 영역이 공통 UI 스타일을 사용하도록 통일.
+- **`TemplatePanel.tsx`**
+  - “규칙 추가” 버튼을 `Button`으로 교체.
+- **`AiPanel.tsx`**
+  - API Key “저장” 버튼 → `Button`.
+  - “다시 입력” → `variant="ghost"`, `size="sm"` 인 `Button`.
+  - 하단 “AI 도움받기” 버튼 → `Button`.
+- **`AiPreviewModal.tsx`**
+  - 하단 액션 버튼을 `Button`으로 교체:
+    - “취소” → `variant="outline"`.
+    - “Output에 적용” → 기본 `Button`.
+
+### 5. UI 검토 메모
+
+- 전체 레이아웃
+  - 상단 `Banner` + 중앙 정렬된 `main-content`(최대 폭 1200px) 구조로, shadcn 예제 레이아웃과 유사한 구조를 유지.
+  - 좌측 사이드바(규칙/템플릿/AI 패널)와 우측 에디터 영역이 모두 카드 단위로 구분되어 가독성이 좋아짐.
+- 버튼/입력 일관성
+  - 주요 액션 버튼(`정렬하기`, `규칙 추가`, `AI 도움받기`, 모달 액션 등)이 모두 동일한 `Button` 컴포넌트를 사용해 톤이 통일됨.
+  - 에디터/텍스트 입력은 `Textarea`와 기존 인풋 스타일이 섞여 있지만, 추후 필요 시 `Input`, `Select`, `Checkbox` 컴포넌트로 확장 가능.
+- 모달
+  - AI 미리보기 모달은 shadcn Dialog와 유사한 카드 스타일(배경 블러 없는 다크 오버레이 + 라운딩/보더/쉐도우)로 조정됨.
+
+### 6. 앞으로 확장 아이디어
+
+- shadcn 스타일 `Input`, `Select`, `Checkbox`, `Switch` 등을 추가로 정의해 `RulePanel`, `TemplatePanel`, `AiPanel`의 `<input>`, `<select>`, `<checkbox>` 도 순차적으로 교체.
+- Radix Dialog 컴포넌트를 직접 사용해 `AiPreviewModal`을 완전한 shadcn Dialog 패턴으로 마이그레이션.
+- 다크 모드 토글 도입 시 `:root` / `.dark` 변수 세트 추가 후 Tailwind `darkMode: 'class'` 활용.
+

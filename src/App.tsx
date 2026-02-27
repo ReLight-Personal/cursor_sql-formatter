@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import './App.css'
+import { Button } from './components/ui/button'
 import Banner from './components/Banner'
 import EditorPanel from './components/EditorPanel'
 import RulePanel from './components/RulePanel'
@@ -151,9 +152,7 @@ function App() {
             placeholder="SQL 쿼리를 입력하세요..."
           />
           <div className="divider">
-            <button className="format-button" onClick={handleFormat}>
-              정렬하기 →
-            </button>
+            <Button onClick={handleFormat}>정렬하기 →</Button>
           </div>
           <EditorPanel
             title="Output"

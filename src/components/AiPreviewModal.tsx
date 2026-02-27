@@ -1,4 +1,5 @@
 import './AiPreviewModal.css'
+import { Button } from './ui/button'
 
 interface AiPreviewModalProps {
   before: string
@@ -26,12 +27,21 @@ export default function AiPreviewModal({ before, after, onApply, onCancel }: AiP
         </div>
 
         <div className="ai-modal-actions">
-          <button type="button" className="ai-modal-btn ai-modal-cancel" onClick={onCancel}>
+          <Button
+            type="button"
+            variant="outline"
+            className="ai-modal-btn ai-modal-cancel"
+            onClick={onCancel}
+          >
             취소
-          </button>
-          <button type="button" className="ai-modal-btn ai-modal-apply" onClick={onApply}>
+          </Button>
+          <Button
+            type="button"
+            className="ai-modal-btn ai-modal-apply"
+            onClick={onApply}
+          >
             Output에 적용
-          </button>
+          </Button>
         </div>
       </div>
     </div>
