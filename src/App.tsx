@@ -1,11 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import './App.css'
-import { Button } from './components/ui/button'
 import Banner from './components/Banner'
-import EditorPanel from './components/EditorPanel'
-import RulePanel from './components/RulePanel'
-import TemplatePanel from './components/TemplatePanel'
-import AiPanel from './components/AiPanel'
+import Sidebar from './components/Sidebar'
+import EditorContainer from './components/EditorContainer'
 import AiPreviewModal from './components/AiPreviewModal'
 import { formatWithRules } from './utils/formatSql'
 import { applyReplaceRules } from './utils/applyReplaceRules'
@@ -31,6 +28,7 @@ function App() {
   const [customRules, setCustomRules] = useState<ReplaceRuleItem[]>(() => loadCustomRules() ?? [])
   const [isTopBannerHidden, setIsTopBannerHidden] = useState(false)
   const [isBottomBannerHidden, setIsBottomBannerHidden] = useState(false)
+  const [isSidebarHidden, setIsSidebarHidden] = useState(false)
 
   const [aiProvider, setAiProvider] = useState<AiProvider>(() => loadAiProvider() ?? 'openai')
   const [apiKey, setApiKey] = useState('')
@@ -135,45 +133,44 @@ function App() {
     setIsBottomBannerHidden(!isBottomBannerHidden)
   }
 
+  const toggleSidebar = () => {
+    setIsSidebarHidden(!isSidebarHidden)
+  }
+
   return (
     <div className="app">
-      <Banner isHidden={isTopBannerHidden} onToggleHide={toggleTopBanner} position='top' />
-      <div className={`main-content ${isTopBannerHidden ? 'banner-hidden' : ''}`}>
-        <div className="sidebar">
-          <RulePanel rules={rules} onChange={setRules} />
-          <TemplatePanel rules={customRules} onChange={setCustomRules} />
-          <AiPanel
-            provider={aiProvider}
+      <Banner position='top' isHidden={isTopBannerHidden} onToggleHide={toggleTopBanner} />
+      <div className={`main-content ${isTopBannerHidden ? 'banner-hidden' : ''} ${isSidebarHidden ? 'sidebar-hidden' : ''}`}>
+        {!isSidebarHidden && (
+          <Sidebar
+            rules={rules}
+            onRulesChange={setRules}
+            customRules={customRules}
+            onCustomRulesChange={setCustomRules}
+            aiProvider={aiProvider}
             apiKey={apiKey}
-            onProviderChange={setAiProvider}
+            onAiProviderChange={setAiProvider}
             onApiKeyChange={handleApiKeyChange}
-            onSaveKey={handleSaveApiKey}
-            onClearKey={handleClearApiKey}
+            onSaveApiKey={handleSaveApiKey}
+            onClearApiKey={handleClearApiKey}
             onRequestAi={handleRequestAi}
-            isLoading={aiLoading}
+            aiLoading={aiLoading}
             keySaved={keySaved}
+            isHidden={false}
           />
-        </div>
-        <div className="editor-container">
-          <EditorPanel
-            title="Input"
-            value={inputSql}
-            onChange={setInputSql}
-            placeholder="SQL 쿼리를 입력하세요..."
-          />
-          <div className="divider">
-            <Button onClick={handleFormat}>정렬하기 →</Button>
-          </div>
-          <EditorPanel
-            title="Output"
-            value={outputSql}
-            onChange={setOutputSql}
-            placeholder="정렬된 결과가 여기에 표시됩니다..."
-            readOnly
-          />
-        </div>
+        )}
+        <EditorContainer
+          inputSql={inputSql}
+          onInputChange={setInputSql}
+          outputSql={outputSql}
+          onOutputChange={setOutputSql}
+          onFormat={handleFormat}
+        />
+        <button className={`sidebar-toggle-button ${isSidebarHidden ? 'sidebar-hidden' : ''}`} onClick={toggleSidebar}>
+          {isSidebarHidden ? '▶' : '◀'}
+        </button>
       </div>
-      <Banner isHidden={isBottomBannerHidden} onToggleHide={toggleBottomBanner} position='bottom' />
+      <Banner position='bottom' isHidden={isBottomBannerHidden} onToggleHide={toggleBottomBanner} />
       {aiPreview && (
         <AiPreviewModal
           before={aiPreview.before}

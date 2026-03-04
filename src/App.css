@@ -16,26 +16,31 @@
   display: flex;
   flex: 1;
   gap: 1rem;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 60px;
   max-width: 1200px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   transition: margin-top 0.3s ease-in-out;
+  position: relative;
 }
 
 .main-content.banner-hidden {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .main-content.banner-at-bottom.banner-hidden {
   margin-bottom: 1rem;
 }
 
+.main-content.sidebar-hidden {
+  max-width: 100%;
+}
+
 @media (max-width: 1024px) {
   .main-content {
     flex-direction: column;
+    position: relative;
   }
 }
 
@@ -64,11 +69,24 @@
   overflow-y: auto;
   flex-shrink: 0;
   width: 320px;
+  transition: all 0.3s ease-in-out;
 }
 
 @media (max-width: 1024px) {
   .sidebar {
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: hsl(var(--background));
+    border-right: 1px solid hsl(var(--border));
+    z-index: 10;
+    transform: translateX(0);
+  }
+  
+  .sidebar.hidden {
+    transform: translateX(-100%);
   }
 }
 
@@ -160,5 +178,51 @@
   .position-toggle-button {
     right: 1rem;
     padding: 0.5rem;
+  }
+}
+
+.sidebar-toggle-button {
+  display: none;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  color: hsl(var(--muted-foreground));
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.1);
+  z-index: 11;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-button:hover {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  transform: translateY(-50%) scale(1.05);
+}
+
+.sidebar-toggle-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+@media (max-width: 1024px) {
+  .sidebar-toggle-button {
+    display: flex;
+  }
+  
+  .sidebar-toggle-button.sidebar-hidden {
+    left: 10px;
+  }
+  
+  .sidebar-toggle-button:not(.sidebar-hidden) {
+    left: 330px;
   }
 }

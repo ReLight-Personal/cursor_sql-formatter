@@ -164,7 +164,13 @@
     font-size: 1.1rem;
   }
   .banner-subtitle {
-    visibility: hidden;
+    display: none;
+  }
+}
+
+@media (max-width: 364px) {
+  .banner-title {
+    font-size: 0.9rem;
   }
 }
 
