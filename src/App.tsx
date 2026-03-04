@@ -29,7 +29,8 @@ function App() {
   const [outputSql, setOutputSql] = useState('')
   const [rules, setRules] = useState<FormatRulesState>(() => loadFormatRules() ?? defaultFormatRules)
   const [customRules, setCustomRules] = useState<ReplaceRuleItem[]>(() => loadCustomRules() ?? [])
-  const [isBannerHidden, setIsBannerHidden] = useState(false)
+  const [isTopBannerHidden, setIsTopBannerHidden] = useState(false)
+  const [isBottomBannerHidden, setIsBottomBannerHidden] = useState(false)
 
   const [aiProvider, setAiProvider] = useState<AiProvider>(() => loadAiProvider() ?? 'openai')
   const [apiKey, setApiKey] = useState('')
@@ -126,14 +127,18 @@ function App() {
     }
   }
 
-  const toggleBanner = () => {
-    setIsBannerHidden(!isBannerHidden)
+  const toggleTopBanner = () => {
+    setIsTopBannerHidden(!isTopBannerHidden)
+  }
+
+  const toggleBottomBanner = () => {
+    setIsBottomBannerHidden(!isBottomBannerHidden)
   }
 
   return (
     <div className="app">
-      <Banner isHidden={isBannerHidden} onToggleHide={toggleBanner} position='top' />
-      <div className={`main-content ${isBannerHidden ? 'banner-hidden' : ''}`}>
+      <Banner isHidden={isTopBannerHidden} onToggleHide={toggleTopBanner} position='top' />
+      <div className={`main-content ${isTopBannerHidden ? 'banner-hidden' : ''}`}>
         <div className="sidebar">
           <RulePanel rules={rules} onChange={setRules} />
           <TemplatePanel rules={customRules} onChange={setCustomRules} />
@@ -168,7 +173,7 @@ function App() {
           />
         </div>
       </div>
-      <Banner isHidden={isBannerHidden} onToggleHide={toggleBanner} position='bottom' />
+      <Banner isHidden={isBottomBannerHidden} onToggleHide={toggleBottomBanner} position='bottom' />
       {aiPreview && (
         <AiPreviewModal
           before={aiPreview.before}

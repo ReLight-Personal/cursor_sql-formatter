@@ -3,10 +3,35 @@ import './Banner.css'
 interface BannerProps {
   isHidden?: boolean
   onToggleHide?: () => void
-  position?: 'top' | 'bottom'
+  position?: 'top' | 'bottom' | 'left' | 'right'
 }
 
 const Banner = ({ isHidden = false, onToggleHide, position = 'top' }: BannerProps) => {
+  const getArrowDirection = () => {
+    if (position === 'top') {
+      return isHidden ? 'arrow-down' : 'arrow-up'
+    } else if (position === 'bottom') {
+      return isHidden ? 'arrow-up' : 'arrow-down'
+    } else if (position === 'left') {
+      return isHidden ? 'arrow-right' : 'arrow-left'
+    } else if (position === 'right') {
+      return isHidden ? 'arrow-left' : 'arrow-right'
+    }
+    return 'arrow-down'
+  }
+
+  const getAriaLabel = () => {
+    if (isHidden) {
+      return position === 'top' ? "Show top banner" : 
+             position === 'bottom' ? "Show bottom banner" :
+             position === 'left' ? "Show left banner" : "Show right banner"
+    } else {
+      return position === 'top' ? "Hide top banner" : 
+             position === 'bottom' ? "Hide bottom banner" :
+             position === 'left' ? "Hide left banner" : "Hide right banner"
+    }
+  }
+
   return (
     <div className={`banner ${isHidden ? 'banner-hidden' : ''} banner-${position}`}>
       <div className={`banner-content ${position === 'bottom' ? 'title-hidden' : ''}`}>
@@ -19,7 +44,7 @@ const Banner = ({ isHidden = false, onToggleHide, position = 'top' }: BannerProp
       <button 
         className="hide-button" 
         onClick={onToggleHide}
-        aria-label={isHidden ? "Show banner" : "Hide banner"}
+        aria-label={getAriaLabel()}
       >
         <svg 
           width="16" 
@@ -28,7 +53,7 @@ const Banner = ({ isHidden = false, onToggleHide, position = 'top' }: BannerProp
           fill="none" 
           stroke="currentColor" 
           strokeWidth="2"
-          className={`arrow-icon ${isHidden ? 'arrow-up' : 'arrow-down'}`}
+          className={`arrow-icon ${getArrowDirection()}`}
         >
           <path d="M6 9l6 6 6-6"/>
         </svg>
