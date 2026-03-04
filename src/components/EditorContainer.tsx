@@ -1,5 +1,6 @@
 import { Button } from './ui/button'
 import EditorPanel from './EditorPanel'
+import './EditorContainer.css'
 
 interface EditorContainerProps {
   inputSql: string

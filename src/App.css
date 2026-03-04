@@ -62,29 +62,6 @@
   }
 }
 
-
-.editor-container {
-  display: flex;
-  flex: 1;
-  gap: 0.75rem;
-  min-width: 0;
-}
-
-@media (max-width: 900px) {
-  .editor-container {
-    flex-direction: column;
-  }
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.25rem;
-  min-width: 72px;
-}
-
-
 .format-button {
   padding: 0.7rem 1.6rem;
   border-radius: var(--radius-md);
