@@ -4,6 +4,7 @@ import AiPanel from './AiPanel'
 import type { FormatRulesState } from '../types/formatRules'
 import type { ReplaceRuleItem } from '../types/customRules'
 import type { AiProvider } from '../types/ai'
+import './Sidebar.css'
 
 interface SidebarProps {
   rules: FormatRulesState
@@ -20,6 +21,7 @@ interface SidebarProps {
   aiLoading: boolean
   keySaved: boolean
   isHidden?: boolean
+  onToggle?: () => void
 }
 
 export default function Sidebar({
@@ -37,9 +39,10 @@ export default function Sidebar({
   aiLoading,
   keySaved,
   isHidden = false,
+  onToggle,
 }: SidebarProps) {
   return (
-    <div className={`sidebar ${isHidden ? 'hidden' : ''}`}>
+    <div className={`sidebar ${isHidden ? 'is-closed' : ''}`}>
       <RulePanel rules={rules} onChange={onRulesChange} />
       <TemplatePanel rules={customRules} onChange={onCustomRulesChange} />
       <AiPanel
@@ -53,6 +56,11 @@ export default function Sidebar({
         isLoading={aiLoading}
         keySaved={keySaved}
       />
+      {onToggle && (
+        <button className="sidebar-toggle-button" onClick={onToggle}>
+          {isHidden ? '▶' : '◀'}
+        </button>
+      )}
     </div>
   )
 }

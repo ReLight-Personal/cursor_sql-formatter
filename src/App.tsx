@@ -141,24 +141,23 @@ function App() {
     <div className="app">
       <Banner position='top' isHidden={isTopBannerHidden} onToggleHide={toggleTopBanner} />
       <div className={`main-content ${isTopBannerHidden ? 'banner-hidden' : ''} ${isSidebarHidden ? 'sidebar-hidden' : ''}`}>
-        {!isSidebarHidden && (
-          <Sidebar
-            rules={rules}
-            onRulesChange={setRules}
-            customRules={customRules}
-            onCustomRulesChange={setCustomRules}
-            aiProvider={aiProvider}
-            apiKey={apiKey}
-            onAiProviderChange={setAiProvider}
-            onApiKeyChange={handleApiKeyChange}
-            onSaveApiKey={handleSaveApiKey}
-            onClearApiKey={handleClearApiKey}
-            onRequestAi={handleRequestAi}
-            aiLoading={aiLoading}
-            keySaved={keySaved}
-            isHidden={false}
-          />
-        )}
+        <Sidebar
+          rules={rules}
+          onRulesChange={setRules}
+          customRules={customRules}
+          onCustomRulesChange={setCustomRules}
+          aiProvider={aiProvider}
+          apiKey={apiKey}
+          onAiProviderChange={setAiProvider}
+          onApiKeyChange={handleApiKeyChange}
+          onSaveApiKey={handleSaveApiKey}
+          onClearApiKey={handleClearApiKey}
+          onRequestAi={handleRequestAi}
+          aiLoading={aiLoading}
+          keySaved={keySaved}
+          isHidden={isSidebarHidden}
+          onToggle={toggleSidebar}
+        />
         <EditorContainer
           inputSql={inputSql}
           onInputChange={setInputSql}
@@ -166,9 +165,6 @@ function App() {
           onOutputChange={setOutputSql}
           onFormat={handleFormat}
         />
-        <button className={`sidebar-toggle-button ${isSidebarHidden ? 'sidebar-hidden' : ''}`} onClick={toggleSidebar}>
-          {isSidebarHidden ? '▶' : '◀'}
-        </button>
       </div>
       <Banner position='bottom' isHidden={isBottomBannerHidden} onToggleHide={toggleBottomBanner} />
       {aiPreview && (
