@@ -1,8 +1,8 @@
-import { formatSql, SqlFormatter } from '../lib/sql-formatter'
+import { SqlFormatter } from '../lib/sql-formatter'
 import type { FormatRulesState } from '../types/formatRules'
 import type { IndentType, CommaPosition, SqlDialect } from '../lib/sql-formatter/types/config'
 
-const DIALECT_LABEL: Record<SqlDialect, string> = {
+export const DIALECT_LABEL: Record<SqlDialect, string> = {
   sql:         'Standard SQL',
   plsql:       'PL/SQL',
   mysql:       'MySQL',
@@ -16,7 +16,7 @@ export interface FormatResult {
   detectedDialectLabel: string
 }
 
-/** sql-formatter에 넘길 옵션 (활성화된 규칙만 반영) */
+/** FormatRulesState → FormatOptions 변환 */
 function buildFormatOptions(rules: FormatRulesState) {
   return {
     dialect: 'sql' as const,
@@ -28,11 +28,10 @@ function buildFormatOptions(rules: FormatRulesState) {
   }
 }
 
-/** 현재 규칙에 따라 SQL 포매팅 */
+/** SQL 포매팅 + 방언 감지 */
 export function formatWithRules(sql: string, rules: FormatRulesState): FormatResult {
   const options = buildFormatOptions(rules)
   const formatter = new SqlFormatter(options)
-
   const detectedDialect = formatter.detectDialect(sql)
   const formattedSql = formatter.format(sql, options)
 
@@ -41,4 +40,11 @@ export function formatWithRules(sql: string, rules: FormatRulesState): FormatRes
     detectedDialect,
     detectedDialectLabel: DIALECT_LABEL[detectedDialect],
   }
+}
+
+/** 방언 감지만 수행 (포매팅 없음) — 입력 중 실시간 감지용 */
+export function detectDialectOnly(sql: string): { dialect: SqlDialect; label: string } {
+  const formatter = new SqlFormatter()
+  const dialect = formatter.detectDialect(sql)
+  return { dialect, label: DIALECT_LABEL[dialect] }
 }
